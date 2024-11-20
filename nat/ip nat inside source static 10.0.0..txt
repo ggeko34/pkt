@@ -1,0 +1,27 @@
+()#router rip
+(-router)#version 2
+
+(-if)#ip nat inside
+(-if)#ip nat outside
+
+#1
+()#router rip
+()#version 2
+
+static translation 1 to 1
+ip nat inside source static 10.0.0.240 209.165.100.29
+
+1 to 1 port:
+ip nat inside source static tcp 10.0.0.250 80 209.165.100.30 80
+
+
+NAT overload
+()#access-list 10 permit 10.0.0.0 0.0.0.255
+()#ip nat inside source list 10 interface fa0/0 overload
+
+#2
+dynamic nat pool
+()#access-list 1 permit 192.168.1.0 0.0.0.255
+()#ip nat pool NAME 209.165.100.17 209.165.100.24(range) netmask 255.255.255.240
+()#ip nat inside source list 1 pool NAME overload
+
