@@ -1,0 +1,26 @@
+OSPF
+()#router ospf 1
+()#network 10.0.0.0 0.255.255.255 area 0
+
+
+
+
+VLAN
+()#do sh vlan
+
+()#vlan 2
+()#name office
+()#exit
+()#vlan 3
+()#name home
+()#exit
+
+// Config port/interface
+()#switchport mode access // optional/conditional
+()#switchport access vlan 2
+
+// identify and configure trunk ports between switches(just in case)
+()#switchport mode trunk
+
+// Extra
+()#int range fa0/x-y // select interface range from x/1,2,3,... to y/20,12,22,...

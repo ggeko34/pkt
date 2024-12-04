@@ -1,0 +1,33 @@
+### ACL
+#### Standard
+
+()#access—list 10 permit host 192.168.10.10
+()#...
+()#...
+()#access—list 10 deny any // Last command
+// Rules
+()#ip access-group 10 out
+#sh access-list
+
+
+#### Extended
+()#access-list 120 permit ip 192.168.10.10 255.255.255.0 10.10.10.20 255.255.255.0
+// Host/Source ip <> Host/source musk or wild <> Destination ip <> Destination musk or wild
+()#...
+()#...
+()#access—list 120 deny ip any any
+// Rules
+()#ip access-group 120 in
+
+
+
+#### Clear ACL
+()#no ip access-group 10 out
+()#no access-list 10
+
+
+#erase startup-config
+#reload
+
+
+
